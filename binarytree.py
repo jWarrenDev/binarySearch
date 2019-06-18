@@ -46,3 +46,33 @@ def recursive(data, target, low, high):
             return recursive(data, target, mid-1, high)
 
 print(recursive(data, target, 0, len(data) -1))
+
+
+# start by choosing a pivot
+# this can be the first or last element
+# the middle, median, or random element usually performs better (tends to split the original data more evenly)
+# b. Move all elements smaller than the pivot to its left hand side. move all elements larger than pivot to its right hand side.
+# c. recursively quick sort LHS and RHS until (some base case) where a side only contains a single element
+# sorted_thingy [1][2] [3][4][5][6]
+
+
+def partition(data):
+    left = []
+    pivot = data[0]
+    right = []
+    for variable in data[1:]:
+        if variable <= pivot:
+            left.append(variable)
+        else:
+            right.append(variable)
+    return left, pivot, right
+
+
+def quicksort(data):
+    if data == []:
+        return data
+    left, pivot, right = partition(data)
+    return quicksort(left) + [pivot] + quicksort(right)
+    
+print(quicksort([5, 9, 3, 7, 2, 8, 1, 6]))
+
